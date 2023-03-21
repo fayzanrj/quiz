@@ -6,6 +6,7 @@ let current = document.getElementsByClassName('current')
 let currentNo = 1;
 let score = document.getElementById('score')
 let scored = 0;
+let timeout;
 
 let ul = document.getElementsByTagName('li')
 
@@ -15,9 +16,9 @@ for (let i = 0; i < ul.length; i++) {
             scored++;
             ev.target.classList.add('green');
 
-            setTimeout(()=>{
-                next.click()
-            },3000)
+           timeout =  setTimeout(()=>{
+            next.click()
+        },3000)
         } else {
             let options = document.getElementsByClassName('option');
             for (let i = 0; i < options.length; i++) {
@@ -28,7 +29,7 @@ for (let i = 0; i < ul.length; i++) {
                     options[i].classList.add('green')
                 }
             }
-            setTimeout(()=>{
+            timeout =  setTimeout(()=>{
                 next.click()
             },3000)
         }
@@ -37,6 +38,7 @@ for (let i = 0; i < ul.length; i++) {
 
 
 next.addEventListener('click', () => {
+    clearTimeout(timeout);
     currentNo++;
     if (currentNo <= current.length) {
         current[currentNo - 1].innerHTML = currentNo;
